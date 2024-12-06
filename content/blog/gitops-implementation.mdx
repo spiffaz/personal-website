@@ -1,0 +1,70 @@
+---
+title: 'Implementing GitOps with ArgoCD and Kubernetes'
+date: '2024-11-28'
+excerpt: 'A step-by-step guide to setting up a GitOps workflow using ArgoCD for Kubernetes deployments.'
+category: 'GitOps'
+tags: ['GitOps', 'ArgoCD', 'Kubernetes', 'CI/CD']
+author:
+  name: 'Spiff Azeta'
+  image: '/api/placeholder/80/80'
+  bio: 'DevOps Engineer passionate about automation and cloud infrastructure.'
+  social:
+    github: 'https://github.com/yourusername'
+    twitter: 'https://twitter.com/yourusername'
+    linkedin: 'https://linkedin.com/in/yourusername'
+readTime: '10 min read'
+---
+
+# GitOps with ArgoCD
+
+Learn how to implement GitOps practices using ArgoCD.
+
+## Installation
+
+First, install ArgoCD in your cluster:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argocd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-server
+  namespace: argocd
+spec:
+  selector:
+    matchLabels:
+      app: argocd-server
+  template:
+    metadata:
+      labels:
+        app: argocd-server
+    spec:
+      containers:
+      - name: argocd-server
+        image: argoproj/argocd:v2.8.0
+```
+
+## Application Setup
+
+Create your first ArgoCD application:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/myorg/myapp.git
+    targetRevision: HEAD
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp
+```

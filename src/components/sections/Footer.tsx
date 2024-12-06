@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { Github, Linkedin, Twitter, Mail, Terminal } from 'lucide-react';
+import Link from 'next/link';
 
 const Footer: React.FC = () => {
   const navigation = {
@@ -27,10 +28,10 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex flex-col items-center space-y-8">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2">
             <Terminal className="h-6 w-6 text-purple-400" />
             <span className="text-white font-mono">Spiff.Azeta</span>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="flex flex-wrap justify-center gap-8">

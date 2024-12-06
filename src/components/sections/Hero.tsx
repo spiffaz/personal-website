@@ -1,9 +1,8 @@
-// src/components/sections/Hero.tsx
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import { Terminal, Github, Linkedin, Mail, Server, Cloud, Code2, GitBranch } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 interface TypewriterProps {
   text: string;
@@ -152,23 +151,7 @@ const Hero: React.FC = () => {
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled ? 'bg-black/40 backdrop-blur-md py-2' : 'bg-transparent py-4'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Terminal className="h-8 w-8" />
-              <span className="font-mono text-lg">Spiff.Azeta</span>
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="hover:text-purple-300 transition-colors">About</a>
-              <a href="#skills" className="hover:text-purple-300 transition-colors">Skills</a>
-              <a href="#projects" className="hover:text-purple-300 transition-colors">Projects</a>
-              <a href="#blog" className="hover:text-purple-300 transition-colors">Blog</a>
-              <button className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors">
-                Contact
-              </button>
-            </div>
-          </div>
-        </div>
+        <Navigation />
       </nav>
 
       {/* Hero Content */}
@@ -182,7 +165,7 @@ const Hero: React.FC = () => {
               Hey, I'm <span className="text-purple-400">Spiff</span>
             </h1>
             <p className="text-xl text-gray-300">
-            I'm a DevOps Engineer who loves automation, infrastructure as code, and building reliable, scalable systems. I'm always exploring new tech like AI and crypto, looking for creative ways to apply them or build cool stuff.
+              I'm a DevOps Engineer who loves automation, infrastructure as code, and building reliable, scalable systems. I'm always exploring new tech like AI and crypto, looking for creative ways to apply them or build cool stuff.
             </p>
             <div className="flex space-x-6">
               <Github className="h-6 w-6 hover:text-purple-400 cursor-pointer transition-colors" />

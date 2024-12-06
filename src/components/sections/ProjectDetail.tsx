@@ -1,7 +1,8 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 const ProjectDetail = () => {
   // In a real Next.js app, this would be populated by getStaticProps or similar
@@ -26,7 +27,7 @@ const ProjectDetail = () => {
       "Terraform",
       "Python",
       "Docker",
-      "Kubernetes",
+      "Kubernetes", 
       "GitHub Actions"
     ],
     challenges: [
@@ -36,14 +37,14 @@ const ProjectDetail = () => {
       },
       {
         title: "Legacy System Integration",
-        description: "Created custom middleware to maintain compatibility with remaining on-premise systems."
+        description: "Created custom middleware to maintain compatibility with remaining on-premise systems."  
       }
     ],
     keyFeatures: [
       "Automated infrastructure provisioning",
       "Multi-region failover",
       "Real-time monitoring and alerting",
-      "Self-healing infrastructure"
+      "Self-healing infrastructure"  
     ],
     images: [
       "/api/placeholder/800/400",
@@ -51,11 +52,31 @@ const ProjectDetail = () => {
     ]
   };
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 text-white">
-      {/* Header */}
-      <header className="bg-black/20 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Navigation */}
+      <nav 
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          scrolled ? 'bg-black/40 backdrop-blur-md py-2' : 'bg-transparent py-4'
+        }`}
+      >
+        <Navigation />
+      </nav>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        {/* Header */}
+        <header className="mb-12">
           <a href="/projects" className="inline-flex items-center text-purple-400 hover:text-purple-300 mb-8">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Projects
@@ -91,12 +112,10 @@ const ProjectDetail = () => {
               )}
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-3 gap-12">
+        {/* Main Content */}
+        <main className="grid md:grid-cols-3 gap-12">
           {/* Main Information */}
           <div className="md:col-span-2 space-y-8">
             {/* Overview */}
@@ -188,8 +207,8 @@ const ProjectDetail = () => {
               </ul>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,70 @@
+---
+title: 'Building a Comprehensive Kubernetes Monitoring Stack'
+date: '2024-11-25'
+excerpt: 'Set up a complete monitoring solution with Prometheus, Grafana, and Alert Manager for Kubernetes clusters.'
+category: 'Monitoring'
+tags: ['Kubernetes', 'Prometheus', 'Grafana', 'Monitoring']
+author:
+  name: 'Spiff Azeta'
+  image: '/api/placeholder/80/80'
+  bio: 'DevOps Engineer passionate about automation and cloud infrastructure.'
+  social:
+    github: 'https://github.com/yourusername'
+    twitter: 'https://twitter.com/yourusername'
+    linkedin: 'https://linkedin.com/in/yourusername'
+readTime: '12 min read'
+---
+
+# Kubernetes Monitoring Stack
+
+Learn how to implement comprehensive monitoring for your Kubernetes clusters.
+
+## Prometheus Setup
+
+Install Prometheus using Helm:
+
+```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus-community/kube-prometheus-stack
+```
+
+## Grafana Dashboards
+
+Create custom dashboards in Grafana:
+
+```json
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "panels": [
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        }
+      },
+      "title": "Cluster CPU Usage"
+    }
+  ]
+}
+```
+
+## Alert Manager Configuration
+
+Set up alerting rules:
+
+```yaml
+groups:
+- name: kubernetes
+  rules:
+  - alert: HighCPUUsage
+    expr: sum(rate(container_cpu_usage_seconds_total{pod!=""}[5m])) by (pod) > 0.8
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      description: Pod {{ $labels.pod }} has high CPU usage
+```

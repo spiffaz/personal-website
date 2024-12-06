@@ -1,7 +1,8 @@
-
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import { Terminal, Code2, GitBranch, Cloud, Cpu, Network, Award, Book, ArrowRight } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 const useScrollAnimation = (threshold = 0.1) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -90,7 +91,17 @@ const StatCard = ({ icon: Icon, label, value, delay }) => (
 
 const AboutPage = () => {
   const [animatedStats, setAnimatedStats] = useState({});
+  const [scrolled, setScrolled] = useState(false);
   const [ref, isVisible] = useScrollAnimation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const timeline = [
     {
@@ -145,7 +156,14 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/* Navigation */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/40 backdrop-blur-md py-2' : 'bg-transparent py-4'
+      }`}>
+        <Navigation />
+      </nav>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         {/* Hero Section */}
         <FadeInSection>
           <div className="text-center mb-16">
