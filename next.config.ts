@@ -1,14 +1,12 @@
-import { config } from 'process';
+import type { NextConfig } from 'next'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
   },
-  experimental: {
-    esmExternals: true // Required for Framer Motion
-  }
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
 }
 
-export default nextConfig;
+export default nextConfig

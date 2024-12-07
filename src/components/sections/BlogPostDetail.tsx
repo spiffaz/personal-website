@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, Clock, ArrowLeft, Github, Twitter, Linkedin } from 'lucide-react';
+import { Calendar, Clock, ArrowLeft, Github, Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import MDXContent from '@/components/MDXContent';
@@ -11,6 +11,55 @@ import type { BlogPost } from '@/lib/blog';
 interface BlogPostDetailProps {
   post: BlogPost;
 }
+
+const ShareButtons = ({ title, url }: { title: string; url: string }) => {
+  const handleShare = async (platform: string) => {
+    const shareText = `Check out this article: ${title}`;
+    
+    const shareUrls = {
+      twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
+    };
+
+    if (platform === 'copy') {
+      try {
+        await navigator.clipboard.writeText(url);
+        // You can add a toast notification here if desired
+      } catch (err) {
+        console.error('Failed to copy link:', err);
+      }
+      return;
+    }
+
+    window.open(shareUrls[platform], '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <div className="flex items-center space-x-3">
+      <button
+        onClick={() => handleShare('twitter')}
+        className="p-2 bg-purple-500/20 rounded-full hover:bg-purple-500/30 transition-colors"
+        aria-label="Share on Twitter"
+      >
+        <Twitter className="h-5 w-5 text-purple-400" />
+      </button>
+      <button
+        onClick={() => handleShare('linkedin')}
+        className="p-2 bg-purple-500/20 rounded-full hover:bg-purple-500/30 transition-colors"
+        aria-label="Share on LinkedIn"
+      >
+        <Linkedin className="h-5 w-5 text-purple-400" />
+      </button>
+      <button
+        onClick={() => handleShare('copy')}
+        className="p-2 bg-purple-500/20 rounded-full hover:bg-purple-500/30 transition-colors"
+        aria-label="Copy link"
+      >
+        <LinkIcon className="h-5 w-5 text-purple-400" />
+      </button>
+    </div>
+  );
+};
 
 export default function BlogPostDetail({ post }: BlogPostDetailProps) {
   const [scrolled, setScrolled] = useState(false);
@@ -50,23 +99,30 @@ export default function BlogPostDetail({ post }: BlogPostDetailProps) {
             
             <h1 className="text-4xl font-bold text-white mb-6">{post.title}</h1>
             
-            <div className="flex items-center space-x-4">
-              <div className="relative h-12 w-12">
-                <Image
-                  src={post.author.image}
-                  alt={post.author.name}
-                  fill
-                  sizes="(max-width: 48px) 100vw"
-                  className="rounded-full object-cover"
-                />
-              </div>
-              <div>
-                <p className="text-white font-medium">{post.author.name}</p>
-                <div className="flex items-center text-sm text-gray-400">
-                  <Calendar className="h-4 w-4 mr-1" />
-                  {post.date}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <div className="relative h-12 w-12">
+                  <Image
+                    src={post.author.image}
+                    alt={post.author.name}
+                    fill
+                    sizes="(max-width: 48px) 100vw"
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="text-white font-medium">{post.author.name}</p>
+                  <div className="flex items-center text-sm text-gray-400">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    {post.date}
+                  </div>
                 </div>
               </div>
+              
+              <ShareButtons 
+                title={post.title}
+                url={typeof window !== 'undefined' ? window.location.href : ''}
+              />
             </div>
           </div>
         </header>
@@ -77,6 +133,17 @@ export default function BlogPostDetail({ post }: BlogPostDetailProps) {
           <article className="md:col-span-3">
             <div className="bg-black/20 backdrop-blur-sm rounded-lg p-8 border border-purple-500/20">
               {post.content && <MDXContent source={post.content} />}
+              
+              {/* Bottom Share Section */}
+              <div className="mt-8 pt-8 border-t border-purple-500/20">
+                <div className="flex flex-col items-center">
+                  <h3 className="text-lg font-bold text-white mb-2">Share this article</h3>
+                  <ShareButtons 
+                    title={post.title}
+                    url={typeof window !== 'undefined' ? window.location.href : ''}
+                  />
+                </div>
+              </div>
             </div>
           </article>
 
