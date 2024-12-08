@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, ArrowRight, Search } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BlogPost } from '@/lib/blog';
 import Navigation from '@/components/Navigation';
 
@@ -30,7 +31,16 @@ const FeaturedPost = ({ post }: { post: BlogPost }) => (
       
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <img src={post.author.image} alt={post.author.name} className="h-10 w-10 rounded-full" />
+          <div className="relative h-10 w-10">
+            <Image
+              src={post.author.image}
+              alt={post.author.name}
+              className="rounded-full"
+              fill
+              sizes="40px"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
           <div>
             <p className="text-white font-medium">{post.author.name}</p>
             <div className="flex items-center text-sm text-gray-400">
@@ -78,7 +88,16 @@ const BlogPostCard = ({ post }: { post: BlogPost }) => (
     
     <div className="flex items-center justify-between mt-4">
       <div className="flex items-center space-x-3">
-        <img src={post.author.image} alt={post.author.name} className="h-8 w-8 rounded-full" />
+        <div className="relative h-8 w-8">
+          <Image
+            src={post.author.image}
+            alt={post.author.name}
+            className="rounded-full"
+            fill
+            sizes="32px"
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
         <span className="text-gray-300">{post.author.name}</span>
       </div>
       <span className="text-sm text-gray-400">{post.date}</span>
@@ -189,8 +208,6 @@ export const BlogList: React.FC<BlogListProps> = ({ posts, featuredPost }) => {
           </div>
         )}
       </div>
-
-      
     </div>
   );
 };

@@ -1,22 +1,44 @@
-// src/components/MDXContent.tsx
-'use client';
-
-import React from 'react';
-import { MDXRemote } from 'next-mdx-remote';
+import React, { ReactElement } from 'react';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-type MDXContentProps = {
-  source: any;
+interface MDXContentProps {
+  source: MDXRemoteSerializeResult;
+}
+
+interface CodeProps {
+  className?: string;
+  children: React.ReactNode;
+  [key: string]: unknown;
+}
+
+type ReactElementWithStringChildren = ReactElement & {
+  props: {
+    children: string;
+  };
 };
+
+function isReactElementWithStringChildren(
+  element: unknown
+): element is ReactElementWithStringChildren {
+  return (
+    React.isValidElement(element) &&
+    typeof (element as ReactElementWithStringChildren).props?.children === 'string'
+  );
+}
 
 const components = {
   pre: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-  code: ({ className, children, ...props }: any) => {
+  code: ({ className, children, ...props }: CodeProps) => {
     const match = /language-(\w+)/.exec(className || '');
-    const codeString = React.isValidElement(children) 
-      ? children.props.children 
-      : String(children);
+    let codeString = '';
+    
+    if (isReactElementWithStringChildren(children)) {
+      codeString = children.props.children;
+    } else {
+      codeString = String(children);
+    }
 
     return match ? (
       <SyntaxHighlighter

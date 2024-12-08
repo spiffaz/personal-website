@@ -2,7 +2,8 @@
 "use client";
 
 import React from 'react';
-import { Cloud, Shield, GitBranch, Terminal, Award, Server, ArrowRight } from 'lucide-react';
+import { Cloud, Shield, GitBranch, Award, ArrowRight } from 'lucide-react';
+import Link from 'next/link'
 
 interface Skill {
   name: string;
@@ -93,13 +94,13 @@ const SkillsHighlight: React.FC = () => {
             <h2 className="text-3xl font-bold text-white mb-2">Technical Expertise</h2>
             <p className="text-gray-400">Specialized in cloud infrastructure and DevOps practices</p>
           </div>
-          <a 
+          <Link 
             href="/skills" 
             className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
           >
             View all skills
             <ArrowRight className="ml-2 h-4 w-4" />
-          </a>
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

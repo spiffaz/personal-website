@@ -1,5 +1,5 @@
 import ProjectDetail from '@/components/sections/ProjectDetail';
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default function ProjectPage({ _params }: { _params: { slug: string } }) {
   return <ProjectDetail />;
 }

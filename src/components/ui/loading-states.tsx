@@ -1,5 +1,10 @@
 import { Terminal } from "lucide-react";
 
+interface GridLoaderProps {
+  columns?: number;
+  rows?: number;
+}
+
 const PageLoader = () => (
   <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
     <div className="text-center">
@@ -39,7 +44,7 @@ const CardLoader = () => (
   </div>
 );
 
-const GridLoader = ({ columns = 3, rows = 2 }) => (
+const GridLoader = ({ columns = 3, rows = 2 }: GridLoaderProps) => (
   <div className={`grid md:grid-cols-${columns} gap-6`}>
     {Array.from({ length: columns * rows }).map((_, i) => (
       <CardLoader key={i} />
@@ -47,9 +52,13 @@ const GridLoader = ({ columns = 3, rows = 2 }) => (
   </div>
 );
 
-export default {
+// Create named object for loading components
+const LoadingStates = {
   PageLoader,
   ContentLoader,
   CardLoader,
   GridLoader
 };
+
+// Export the named object as default
+export default LoadingStates;

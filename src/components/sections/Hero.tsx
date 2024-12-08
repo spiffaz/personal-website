@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Terminal, Github, Linkedin, Mail, Server, Cloud, Code2, GitBranch } from 'lucide-react';
+import { Github, Linkedin, Mail, Server, Cloud, Code2, GitBranch } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 
 interface TypewriterProps {

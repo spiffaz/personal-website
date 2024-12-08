@@ -43,58 +43,63 @@ const Navigation = () => {
     { name: 'Contact', href: '/contact', isButton: true }
   ];
 
-  const isActive = (path) => {
+  const isActive = (path: string) => {
     return pathname === path;
   };
 
   return (
     <>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-4 hover:text-purple-300 transition-colors">
-            <Terminal className="h-8 w-8" />
-            <span className="font-mono text-lg">Spiff.Azeta</span>
-          </Link>
+      {/* Main Navigation Container with scroll-based background */}
+      <div className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/40 backdrop-blur-md py-2' : 'py-4'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-4 hover:text-purple-300 transition-colors">
+              <Terminal className="h-8 w-8" />
+              <span className="font-mono text-lg">Spiff.Azeta</span>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              item.isButton ? (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors"
-                >
-                  {item.name}
-                </Link>
-              ) : (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`hover:text-purple-300 transition-colors ${
-                    isActive(item.href) ? 'text-purple-400' : ''
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navigation.map((item) => (
+                item.isButton ? (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`hover:text-purple-300 transition-colors ${
+                      isActive(item.href) ? 'text-purple-400' : ''
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                )
             ))}
-          </div>
+            </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden p-2 hover:bg-purple-500/20 rounded-lg transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-          >
-            {isOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden p-2 hover:bg-purple-500/20 rounded-lg transition-colors"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isOpen}
+            >
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 

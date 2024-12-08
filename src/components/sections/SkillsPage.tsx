@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Cloud, Shield, GitBranch, Terminal, Award, Server, Database, Code2, Network, Book } from 'lucide-react';
+import { Cloud, Shield, GitBranch, Award, Server, Database, Code2, Network, Book } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Image from 'next/image';
 
 interface Skill {
   name: string;
@@ -27,7 +28,28 @@ interface CertificationProps {
   img: string;
 }
 
-const SkillsPage = () => {
+const CertificationCard: React.FC<CertificationProps> = ({ title, issuer, date, img }) => (
+  <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+    <div className="flex items-start space-x-4">
+      <div className="relative w-16 h-16">
+        <Image
+          src={img}
+          alt={title}
+          fill
+          className="rounded object-cover"
+          sizes="64px"
+        />
+      </div>
+      <div>
+        <h3 className="text-white font-bold mb-1">{title}</h3>
+        <p className="text-gray-400 text-sm mb-2">{issuer}</p>
+        <p className="text-purple-400 text-sm">{date}</p>
+      </div>
+    </div>
+  </div>
+);
+
+const SkillsPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [scrolled, setScrolled] = useState(false);
 
@@ -234,19 +256,6 @@ const SkillsPage = () => {
   const filteredCategories = selectedCategory === 'all' 
     ? skillCategories 
     : skillCategories.filter(category => category.id === selectedCategory);
-
-  const CertificationCard: React.FC<CertificationProps> = ({ title, issuer, date, img }) => (
-    <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
-      <div className="flex items-start space-x-4">
-        <img src={img} alt={title} className="w-16 h-16 rounded" />
-        <div>
-          <h3 className="text-white font-bold mb-1">{title}</h3>
-          <p className="text-gray-400 text-sm mb-2">{issuer}</p>
-          <p className="text-purple-400 text-sm">{date}</p>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 text-white">

@@ -1,16 +1,23 @@
 import React from 'react';
-import { Share2, Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
+import { Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
 
 interface ShareButtonsProps {
   title: string;
   url: string;
 }
 
-const ShareButtons = ({ title, url }: ShareButtonsProps) => {
-  const handleShare = async (platform: string) => {
+type SharePlatform = 'twitter' | 'linkedin' | 'copy';
+
+interface ShareUrls {
+  twitter: string;
+  linkedin: string;
+}
+
+const ShareButtons: React.FC<ShareButtonsProps> = ({ title, url }) => {
+  const handleShare = async (platform: SharePlatform) => {
     const shareText = `Check out this article: ${title}`;
     
-    const shareUrls = {
+    const shareUrls: ShareUrls = {
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(url)}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
     };

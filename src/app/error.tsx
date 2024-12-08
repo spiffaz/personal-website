@@ -1,10 +1,9 @@
-// src/app/error.tsx
 'use client';  // Must be at the very top
 
-import { Terminal, AlertTriangle, Home, ArrowLeft } from "lucide-react";
+import { Terminal, AlertTriangle, Home } from "lucide-react";
+import Link from 'next/link'
 
 export default function Error({
-  error,
   reset,
 }: {
   error: Error & { digest?: string }
@@ -44,7 +43,7 @@ export default function Error({
           >
             <Home className="h-4 w-4 mr-2" />
             Back to Home
-            </Link>
+          </Link>
         </div>
       </div>
     </div>

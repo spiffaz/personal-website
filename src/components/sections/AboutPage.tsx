@@ -1,12 +1,40 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Terminal, Code2, GitBranch, Cloud, Cpu, Network, Award, Book, ArrowRight } from 'lucide-react';
+import { Terminal, Code2, GitBranch, Cloud, Network, Award, Book, ArrowRight } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Link from 'next/link'
+
+interface FadeInSectionProps {
+  children: React.ReactNode;
+  delay?: number;
+  direction?: 'up' | 'down' | 'left' | 'right';
+}
+
+interface TimelineEventProps {
+  year: string;
+  title: string;
+  description: string;
+  delay: number;
+}
+
+interface ValueCardProps {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  delay: number;
+}
+
+interface StatCardProps {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+  delay: number;
+}
 
 const useScrollAnimation = (threshold = 0.1) => {
   const [isVisible, setIsVisible] = useState(false);
-  const domRef = React.useRef();
+  const domRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,10 +56,10 @@ const useScrollAnimation = (threshold = 0.1) => {
     };
   }, [threshold]);
 
-  return [domRef, isVisible];
+  return [domRef, isVisible] as const;
 };
 
-const FadeInSection = ({ children, delay = 0, direction = 'up' }) => {
+const FadeInSection: React.FC<FadeInSectionProps> = ({ children, delay = 0, direction = 'up' }) => {
   const [ref, isVisible] = useScrollAnimation();
 
   const directions = {
@@ -52,7 +80,7 @@ const FadeInSection = ({ children, delay = 0, direction = 'up' }) => {
   );
 };
 
-const TimelineEvent = ({ year, title, description, delay }) => (
+const TimelineEvent: React.FC<TimelineEventProps> = ({ year, title, description, delay }) => (
   <FadeInSection delay={delay}>
     <div className="relative pl-8 pb-8 border-l border-purple-500/20 last:border-0">
       <div className="absolute left-0 -translate-x-1/2 w-4 h-4 rounded-full bg-purple-500 transform transition-transform duration-500 hover:scale-150"></div>
@@ -63,7 +91,7 @@ const TimelineEvent = ({ year, title, description, delay }) => (
   </FadeInSection>
 );
 
-const ValueCard = ({ icon: Icon, title, description, delay }) => (
+const ValueCard: React.FC<ValueCardProps> = ({ icon: Icon, title, description, delay }) => (
   <FadeInSection delay={delay}>
     <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20 transform transition-all duration-300 hover:scale-105 hover:border-purple-500/40">
       <div className="bg-purple-500/20 w-12 h-12 rounded-lg flex items-center justify-center mb-4 transform transition-all duration-300 hover:rotate-12">
@@ -75,7 +103,7 @@ const ValueCard = ({ icon: Icon, title, description, delay }) => (
   </FadeInSection>
 );
 
-const StatCard = ({ icon: Icon, label, value, delay }) => (
+const StatCard: React.FC<StatCardProps> = ({ icon: Icon, label, value, delay }) => (
   <FadeInSection delay={delay}>
     <div className="bg-black/20 backdrop-blur-sm rounded-lg p-4 flex items-center space-x-4 transform transition-all duration-300 hover:scale-105">
       <div className="bg-purple-500/20 p-2 rounded-lg transform transition-all duration-300 group-hover:rotate-12">
@@ -89,10 +117,8 @@ const StatCard = ({ icon: Icon, label, value, delay }) => (
   </FadeInSection>
 );
 
-const AboutPage = () => {
-  const [animatedStats, setAnimatedStats] = useState({});
+const AboutPage: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [ref, isVisible] = useScrollAnimation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -233,13 +259,13 @@ const AboutPage = () => {
             <p className="text-gray-300 mb-8">
               I'm always interested in hearing about new projects and opportunities.
             </p>
-            <a 
+            <Link 
               href="/contact"
               className="inline-flex items-center bg-purple-600 hover:bg-purple-700 text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105"
             >
               Get in Touch
               <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </FadeInSection>
       </div>

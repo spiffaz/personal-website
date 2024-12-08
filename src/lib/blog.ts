@@ -1,8 +1,8 @@
-// src/lib/blog.ts
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 export interface BlogPost {
   slug: string;
@@ -22,7 +22,7 @@ export interface BlogPost {
   category: string;
   tags: string[];
   readTime: string;
-  content?: any; // MDX content
+  content?: MDXRemoteSerializeResult; // Properly typed MDX content
 }
 
 const postsDirectory = path.join(process.cwd(), 'content/blog');

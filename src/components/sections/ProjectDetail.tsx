@@ -3,10 +3,32 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+
+interface ProjectData {
+  title: string;
+  company: string;
+  duration: string;
+  description: string;
+  longDescription: string;
+  impact: string[];
+  technologies: string[];
+  challenges: Array<{
+    title: string;
+    description: string;
+  }>;
+  keyFeatures: string[];
+  images: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+}
 
 const ProjectDetail = () => {
+  const [scrolled, setScrolled] = useState(false);
+
   // In a real Next.js app, this would be populated by getStaticProps or similar
-  const projectData = {
+  const projectData: ProjectData = {
     title: "Cloud Infrastructure Migration",
     company: "FinTech Corp",
     duration: "Jan 2023 - June 2023",
@@ -52,8 +74,6 @@ const ProjectDetail = () => {
     ]
   };
 
-  const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -77,10 +97,10 @@ const ProjectDetail = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         {/* Header */}
         <header className="mb-12">
-          <a href="/projects" className="inline-flex items-center text-purple-400 hover:text-purple-300 mb-8">
+          <Link href="/projects" className="inline-flex items-center text-purple-400 hover:text-purple-300 mb-8">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Projects
-          </a>
+          </Link>
           
           <div className="flex justify-between items-start">
             <div>
@@ -93,22 +113,22 @@ const ProjectDetail = () => {
             </div>
             <div className="flex space-x-4">
               {projectData.githubUrl && (
-                <a 
+                <Link 
                   href={projectData.githubUrl}
                   className="flex items-center px-4 py-2 bg-purple-500/20 rounded-lg text-purple-300 hover:bg-purple-500/30 transition-colors"
                 >
                   <Github className="h-5 w-5 mr-2" />
                   View Source
-                </a>
+                </Link>
               )}
               {projectData.liveUrl && (
-                <a 
+                <Link 
                   href={projectData.liveUrl}
                   className="flex items-center px-4 py-2 bg-purple-500/20 rounded-lg text-purple-300 hover:bg-purple-500/30 transition-colors"
                 >
                   <ExternalLink className="h-5 w-5 mr-2" />
                   Live Demo
-                </a>
+                </Link>
               )}
             </div>
           </div>
@@ -157,12 +177,16 @@ const ProjectDetail = () => {
               <h2 className="text-2xl font-bold mb-4">Project Gallery</h2>
               <div className="grid gap-4">
                 {projectData.images.map((image, index) => (
-                  <img 
-                    key={index}
-                    src={image}
-                    alt={`Project screenshot ${index + 1}`}
-                    className="rounded-lg w-full"
-                  />
+                  <div key={index} className="relative w-full h-[400px]">
+                    <Image
+                      src={image}
+                      alt={`Project screenshot ${index + 1}`}
+                      fill
+                      className="rounded-lg object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
+                      priority={index === 0}
+                    />
+                  </div>
                 ))}
               </div>
             </section>

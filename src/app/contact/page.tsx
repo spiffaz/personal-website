@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Github, Linkedin, Mail, Twitter, ArrowRight, MapPin, Calendar, Clock, Loader2, AlertCircle, Check } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Link from 'next/link'
 
 interface FormData {
   name: string;
@@ -125,12 +126,13 @@ const ContactPage = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       router.push('/contact/success');
 
-    } catch (error) {
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to send message. Please try again later.';
       setFormState({
         isLoading: false,
         isSuccess: false,
         isError: true,
-        errorMessage: 'Failed to send message. Please try again later.'
+        errorMessage
       });
     }
   };
@@ -176,7 +178,7 @@ const ContactPage = () => {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-4">
             {socialLinks.map((link, index) => (
-              <a
+              <Link
                 key={index}
                 href={link.url}
                 target="_blank"
@@ -191,7 +193,7 @@ const ContactPage = () => {
                   <p className="text-gray-400 text-sm">{link.description}</p>
                 </div>
                 <ArrowRight className="h-4 w-4 text-purple-400 ml-auto transform transition-all duration-300 group-hover:translate-x-2" />
-              </a>
+              </Link>
             ))}
 
             <div className="bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20 transform transition-all duration-300 hover:scale-[1.02]">
@@ -201,13 +203,13 @@ const ContactPage = () => {
                   For formal inquiries or detailed discussions
                 </p>
               </div>
-              <a 
+              <Link 
                 href="mailto:spiff.azeta@gmail.com"
                 className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors"
               >
                 <Mail className="h-5 w-5 mr-2" />
                 spiff.azeta@gmail.com
-              </a>
+              </Link>
             </div>
           </div>
 

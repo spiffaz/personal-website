@@ -1,6 +1,14 @@
 import { Terminal, AlertTriangle, ArrowLeft, Home } from "lucide-react";
+import Link from 'next/link'
 
-const ErrorLayout = ({ code, title, description, children }) => (
+interface ErrorLayoutProps {
+  code: string;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}
+
+const ErrorLayout = ({ code, title, description, children }: ErrorLayoutProps) => (
   <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 flex items-center justify-center">
     <div className="max-w-2xl mx-auto px-4 text-center">
       <div className="mb-8">
@@ -13,13 +21,13 @@ const ErrorLayout = ({ code, title, description, children }) => (
       {children}
 
       <div className="flex items-center justify-center space-x-4 mt-8">
-        <a 
+        <Link 
           href="/"
           className="flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg text-white transition-colors"
         >
           <Home className="h-4 w-4 mr-2" />
           Back to Home
-        </a>
+        </Link>
         <button 
           onClick={() => window.history.back()}
           className="flex items-center px-4 py-2 border border-purple-400 hover:bg-purple-400/10 rounded-lg text-purple-300 transition-colors"
@@ -39,20 +47,20 @@ export const NotFound = () => (
     description="The page you're looking for doesn't exist or has been moved."
   >
     <div className="grid md:grid-cols-2 gap-4 mt-8 mb-8">
-      <a 
+      <Link 
         href="/projects"
         className="bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300"
       >
         <h3 className="text-lg font-bold text-white mb-2">View Projects</h3>
         <p className="text-gray-300">Check out my latest DevOps and cloud infrastructure projects.</p>
-      </a>
-      <a 
+      </Link>
+      <Link 
         href="/blog"
         className="bg-black/20 backdrop-blur-sm rounded-lg p-6 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300"
       >
         <h3 className="text-lg font-bold text-white mb-2">Read Blog</h3>
         <p className="text-gray-300">Explore tutorials and insights about DevOps practices.</p>
-      </a>
+      </Link>
     </div>
   </ErrorLayout>
 );
@@ -76,7 +84,11 @@ export const ServerError = () => (
   </ErrorLayout>
 );
 
-export default {
+// Create named object for the default export
+const ErrorPages = {
   NotFound,
   ServerError
 };
+
+// Export the named object as default
+export default ErrorPages;

@@ -172,34 +172,34 @@ export default function BlogPostDetail({ post }: BlogPostDetailProps) {
               {post.author.social && (
                 <div className="flex space-x-4">
                   {post.author.social.github && (
-                    <a 
+                    <Link 
                       href={post.author.social.github}
                       target="_blank"
                       rel="noopener noreferrer" 
                       className="text-gray-400 hover:text-purple-400 transition-colors"
                     >
                       <Github className="h-5 w-5" />
-                    </a>
+                    </Link>
                   )}
                   {post.author.social.twitter && (
-                    <a 
+                    <Link 
                       href={post.author.social.twitter}
                       target="_blank"
                       rel="noopener noreferrer" 
                       className="text-gray-400 hover:text-purple-400 transition-colors"
                     >
                       <Twitter className="h-5 w-5" />
-                    </a>
+                    </Link>
                   )}
                   {post.author.social.linkedin && (
-                    <a 
+                    <Link 
                       href={post.author.social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer" 
                       className="text-gray-400 hover:text-purple-400 transition-colors"
                     >
                       <Linkedin className="h-5 w-5" />
-                    </a>
+                    </Link>
                   )}
                 </div>
               )}

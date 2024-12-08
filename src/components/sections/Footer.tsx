@@ -2,7 +2,7 @@
 "use client";
 
 import React from 'react';
-import { Github, Linkedin, Twitter, Mail, Terminal } from 'lucide-react';
+import { Github, Linkedin, Twitter, Terminal } from 'lucide-react';
 import Link from 'next/link';
 
 const Footer: React.FC = () => {

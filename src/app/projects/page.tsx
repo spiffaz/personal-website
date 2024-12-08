@@ -76,7 +76,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-4">
         {project.githubUrl && (
-          <a 
+          <Link 
             href={project.githubUrl}
             className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors"
             target="_blank"
@@ -84,7 +84,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => (
           >
             <Github className="h-5 w-5 mr-2" />
             View Source
-          </a>
+          </Link>
         )}
       </div>
 

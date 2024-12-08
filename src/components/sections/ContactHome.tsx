@@ -1,5 +1,6 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Twitter, ArrowRight } from 'lucide-react';
+import { Github, Linkedin, Twitter, ArrowRight } from 'lucide-react';
+import Link from 'next/link'
 
 const ContactHomeSection = () => {
   const socialLinks = [
@@ -50,13 +51,13 @@ const ContactHomeSection = () => {
               ))}
             </div>
 
-            <a 
+            <Link 
               href="/contact" 
               className="inline-flex items-center bg-purple-600 hover:bg-purple-700 text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:scale-105"
             >
               Let's Connect
               <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

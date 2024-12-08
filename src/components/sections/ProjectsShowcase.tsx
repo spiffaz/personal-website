@@ -1,14 +1,38 @@
-// src/components/sections/ProjectsShowcase.tsx
-
 "use client";
 
 import React, { useState } from 'react';
-import { Github, ExternalLink, GitFork, Star, Code2, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+
+interface ProjectMetrics {
+  [key: string]: string;
+}
+
+interface ProjectLinks {
+  github?: string;
+  demo?: string;
+  documentation?: string;
+}
+
+interface Project {
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  metrics: ProjectMetrics;
+  links: ProjectLinks;
+  featured?: boolean;
+}
+
+interface Category {
+  id: string;
+  name: string;
+}
 
 const ProjectsShowcase = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: "Kubernetes Auto-Scaling Solution",
       description: "Developed a custom autoscaling solution for Kubernetes clusters that reduced infrastructure costs by 40% while maintaining application performance.",
@@ -57,7 +81,7 @@ const ProjectsShowcase = () => {
     }
   ];
 
-  const categories = [
+  const categories: Category[] = [
     { id: 'all', name: 'All Projects' },
     { id: 'infrastructure', name: 'Infrastructure' },
     { id: 'automation', name: 'Automation' },
@@ -75,13 +99,13 @@ const ProjectsShowcase = () => {
           <h2 className="text-3xl font-bold text-white mb-2">Featured Projects</h2>
           <p className="text-gray-400">Explore my recent work in DevOps and cloud infrastructure</p>
         </div>
-        <a 
+        <Link 
           href="/projects" 
           className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
         >
           View all projects
           <ArrowRight className="ml-2 h-4 w-4" />
-        </a>
+        </Link>
       </div>
 
       {/* Category Filter */}

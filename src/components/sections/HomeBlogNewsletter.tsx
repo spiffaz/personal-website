@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import Link from 'next/link'
 
 const BlogPreview = () => (
   <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -8,13 +9,13 @@ const BlogPreview = () => (
         <h2 className="text-3xl font-bold text-white mb-2">Latest Insights</h2>
         <p className="text-gray-400">Thoughts and tutorials on DevOps practices</p>
       </div>
-      <a 
+      <Link 
         href="/blog" 
         className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
       >
         View all posts
         <ArrowRight className="ml-2 h-4 w-4" />
-      </a>
+      </Link>
     </div>
 
     <div className="grid md:grid-cols-3 gap-6">
@@ -54,13 +55,13 @@ const BlogPreview = () => (
           <p className="text-gray-400 mb-4">
             {post.description}
           </p>
-          <a 
+          <Link 
             href={post.link} 
             className="text-purple-400 hover:text-purple-300 inline-flex items-center"
           >
             Read More
             <ArrowRight className="ml-2 h-4 w-4" />
-          </a>
+          </Link>
         </article>
       ))}
     </div>
