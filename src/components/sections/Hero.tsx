@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Server, Cloud, Code2, GitBranch } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import Link from 'next/link';
 
 interface TypewriterProps {
   text: string;
@@ -168,17 +169,42 @@ const Hero: React.FC = () => {
               I'm a DevOps Engineer who loves automation, infrastructure as code, and building reliable, scalable systems. I'm always exploring new tech like AI and crypto, looking for creative ways to apply them or build cool stuff.
             </p>
             <div className="flex space-x-6">
-              <Github className="h-6 w-6 hover:text-purple-400 cursor-pointer transition-colors" />
-              <Linkedin className="h-6 w-6 hover:text-purple-400 cursor-pointer transition-colors" />
-              <Mail className="h-6 w-6 hover:text-purple-400 cursor-pointer transition-colors" />
+              <a 
+                href="https://github.com/spiffaz" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-purple-400 transition-colors"
+              >
+                <Github className="h-6 w-6" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/azeta-spiff/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-purple-400 transition-colors"
+              >
+                <Linkedin className="h-6 w-6" />
+              </a>
+              <a 
+                href="mailto:spiffazeta@gmail.com"
+                className="hover:text-purple-400 transition-colors"
+              >
+                <Mail className="h-6 w-6" />
+              </a>
             </div>
             <div className="flex space-x-4">
-              <button className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-medium transition-colors">
+              <Link
+                href="/projects" 
+                className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-medium transition-colors"
+              >
                 View Portfolio
-              </button>
-              <button className="border border-purple-400 hover:bg-purple-400/10 px-6 py-3 rounded-lg font-medium transition-colors">
+              </Link>
+              <Link
+                href="/contact" 
+                className="border border-purple-400 hover:bg-purple-400/10 px-6 py-3 rounded-lg font-medium transition-colors"
+              >
                 Get in Touch
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -189,9 +215,9 @@ const Hero: React.FC = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
           <StatsCard icon={Server} title="Servers Managed" value="500+" />
-          <StatsCard icon={Cloud} title="Cloud Projects" value="50+" />
-          <StatsCard icon={Code2} title="CI/CD Pipelines" value="200+" />
-          <StatsCard icon={GitBranch} title="Open Source Contributions" value="30+" />
+          <StatsCard icon={Cloud} title="Cloud Projects" value="30+" />
+          <StatsCard icon={Code2} title="CI/CD Pipelines" value="100+" />
+          <StatsCard icon={GitBranch} title="Deployments Completed" value="Lost count" />
         </div>
       </div>
     </div>
