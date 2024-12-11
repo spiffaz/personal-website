@@ -132,18 +132,33 @@ const AboutPage: React.FC = () => {
   const timeline = [
     {
       year: '2024',
-      title: 'Lead DevOps Engineer at TechCorp',
-      description: 'Leading cloud infrastructure modernization and implementing GitOps practices across the organization.'
+      title: 'DevOps Engineer at Multiverse Computing',
+      description: 'Led comprehensive Kubernetes and cloud infrastructure initiatives, including cluster management, CI/CD automation, infrastructure as code implementation, and cost optimization efforts.'
     },
     {
-      year: '2022',
-      title: 'Senior DevOps Engineer at CloudScale',
-      description: 'Architected and implemented multi-cloud solutions, reducing deployment time by 80% and infrastructure costs by 40%.'
+      year: '2021',
+      title: 'DevOps Engineer Team Lead at Stanbic IBTC Bank',
+      description: 'Spearheaded enterprise-wide DevOps initiatives implementing CI/CD pipelines, automated deployments across multiple platforms, and established comprehensive monitoring solutions.'
     },
     {
-      year: '2020',
-      title: 'DevOps Engineer at StartupTech',
-      description: 'Built CI/CD pipelines and automated infrastructure provisioning for rapid product delivery.'
+      year: '2019',
+      title: 'Information Technology Analyst at Asset & Resource Management Holding Company',
+      description: 'Drove automation initiatives through Robotic process Automation (RPA) implementation.'
+    },
+    {
+      year: '2018',
+      title: 'Graduate Intern at Esorae Luxury',
+      description: 'Led a digital transformation initiative by developing and implementing an automated inventory management system that eliminated manual paper processes entirely, demonstrating early success in process automation and digital transformation projects.'
+    },
+    {
+      year: '2017',
+      title: 'Information Technology Intern at NetPlusDotCom',
+      description: 'Gained foundational experience in full-stack web development by independently delivering my first major project, which strengthened my technical skills in front-end and back-end development and laid the groundwork for my progression into DevOps engineering.'
+    },
+    {
+      year: '2017',
+      title: 'Intern at Fidelity Bank PLC',
+      description: 'Gained early experience in digital commerce by managing the Greenmall E-Commerce platform, developing skills in platform operations and digital transformation that would later prove valuable in my DevOps career.'
     }
   ];
 
@@ -156,28 +171,26 @@ const AboutPage: React.FC = () => {
     {
       icon: GitBranch,
       title: 'Continuous Learning',
-      description: 'Stay current with emerging technologies and best practices in the ever-evolving DevOps landscape.'
+      description: 'Stay current with emerging technologies and best practices in the ever-evolving DevOps and Technology landscape.'
     },
     {
       icon: Network,
-      title: 'Collaboration',
+      title: 'Collaboration and Knowledge Sharing',
       description: 'Foster a culture of shared responsibility and knowledge exchange between development and operations.'
     }
   ];
 
   const stats = [
     { icon: Cloud, label: 'Cloud Platforms', value: '3+' },
-    { icon: Terminal, label: 'Tools Mastered', value: '15+' },
-    { icon: Award, label: 'Certifications', value: '5' },
-    { icon: Book, label: 'Blog Posts', value: '20+' }
+    { icon: Terminal, label: 'Tools Mastered', value: '20+' },
+    { icon: Award, label: 'Certifications', value: '2' },
+    { icon: Book, label: 'Blog Posts', value: '5+' }
   ];
 
   const certifications = [
-    'AWS Solutions Architect Professional',
-    'Certified Kubernetes Administrator',
+    'AWS Solutions Architect - Associate',
     'HashiCorp Terraform Associate',
-    'Azure DevOps Engineer Expert',
-    'Google Cloud Professional Engineer'
+    'Certified Kubernetes Administrator (in - progress)'
   ];
 
   return (
